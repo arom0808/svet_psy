@@ -18,6 +18,10 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,4 +62,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function quotes()
+    {
+        return $this->hasMany('App\Models\Quote', 'author_id', 'id');
+    }
 }

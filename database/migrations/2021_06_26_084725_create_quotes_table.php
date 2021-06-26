@@ -16,7 +16,7 @@ class CreateQuotesTable extends Migration
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->string('author');
+            $table->bigInteger('author_id',false,true);
             $table->bigInteger('category_id',false,true)->nullable();
             $table->boolean('isQuoteOfDay')->default(false);
             $table->timestamps();

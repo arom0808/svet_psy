@@ -8,11 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id';
-    protected $guarded = [];
-
-    public function quotes()
-    {
-        return $this->hasMany('App\Models\Quote', 'category_id', 'id');
-    }
 }

@@ -11,8 +11,13 @@ class Quote extends Model
 
     protected $guarded = [];
 
-    public function article()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Article', 'category_id', 'id');
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'author_id', 'id');
     }
 }

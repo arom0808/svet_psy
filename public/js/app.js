@@ -4924,6 +4924,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./vendor/livewire-ui/modal */ "./resources/js/vendor/livewire-ui/modal.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__.default;
 alpinejs__WEBPACK_IMPORTED_MODULE_0__.default.start();
@@ -4958,6 +4960,172 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/vendor/livewire-ui/modal.js":
+/*!**************************************************!*\
+  !*** ./resources/js/vendor/livewire-ui/modal.js ***!
+  \**************************************************/
+/***/ (() => {
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+window.LivewireUiModal = function () {
+  return {
+    show: false,
+    showActiveComponent: true,
+    activeComponent: false,
+    componentHistory: [],
+    modalWidth: 'sm:max-w-2xl',
+    getActiveComponentModalAttribute: function getActiveComponentModalAttribute(key) {
+      if (this.$wire.get('components')[this.activeComponent] !== undefined) {
+        return this.$wire.get('components')[this.activeComponent]['modalAttributes'][key];
+      }
+    },
+    closeModalOnEscape: function closeModalOnEscape(trigger) {
+      if (this.getActiveComponentModalAttribute('closeOnEscape') === false) {
+        return;
+      }
+
+      var force = this.getActiveComponentModalAttribute('closeOnEscapeIsForceful') === true;
+      this.closeModal(force);
+    },
+    closeModalOnClickAway: function closeModalOnClickAway(trigger) {
+      if (this.getActiveComponentModalAttribute('closeOnClickAway') === false) {
+        return;
+      }
+
+      this.closeModal(true);
+    },
+    closeModal: function closeModal() {
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var skipPreviousModals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.getActiveComponentModalAttribute('dispatchCloseEvent') === true) {
+        var componentName = this.$wire.get('components')[this.activeComponent].name;
+        Livewire.emit('modalClosed', componentName);
+      }
+
+      if (skipPreviousModals > 0) {
+        for (var i = 0; i < skipPreviousModals; i++) {
+          this.componentHistory.pop();
+        }
+      }
+
+      var id = this.componentHistory.pop();
+
+      if (id && force === false) {
+        if (id) {
+          this.setActiveModalComponent(id, true);
+        } else {
+          this.show = false;
+        }
+      } else {
+        this.show = false;
+      }
+    },
+    setActiveModalComponent: function setActiveModalComponent(id) {
+      var _this = this;
+
+      var skip = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      this.show = true;
+
+      if (this.activeComponent === id) {
+        return;
+      }
+
+      if (this.activeComponent !== false && skip === false) {
+        this.componentHistory.push(this.activeComponent);
+      }
+
+      var focusableTimeout = 50;
+
+      if (this.activeComponent === false) {
+        this.activeComponent = id;
+        this.showActiveComponent = true;
+        this.modalWidth = 'sm:max-w-' + this.getActiveComponentModalAttribute('maxWidth');
+      } else {
+        this.showActiveComponent = false;
+        focusableTimeout = 400;
+        setTimeout(function () {
+          _this.activeComponent = id;
+          _this.showActiveComponent = true;
+          _this.modalWidth = 'sm:max-w-' + _this.getActiveComponentModalAttribute('maxWidth');
+        }, 300);
+      }
+
+      this.$nextTick(function () {
+        var focusable = _this.$refs[id].querySelector('[autofocus]');
+
+        if (focusable) {
+          setTimeout(function () {
+            focusable.focus();
+          }, focusableTimeout);
+        }
+      });
+    },
+    focusables: function focusables() {
+      var selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=\'-1\'])';
+      return _toConsumableArray(this.$el.querySelectorAll(selector)).filter(function (el) {
+        return !el.hasAttribute('disabled');
+      });
+    },
+    firstFocusable: function firstFocusable() {
+      return this.focusables()[0];
+    },
+    lastFocusable: function lastFocusable() {
+      return this.focusables().slice(-1)[0];
+    },
+    nextFocusable: function nextFocusable() {
+      return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable();
+    },
+    prevFocusable: function prevFocusable() {
+      return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable();
+    },
+    nextFocusableIndex: function nextFocusableIndex() {
+      return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1);
+    },
+    prevFocusableIndex: function prevFocusableIndex() {
+      return Math.max(0, this.focusables().indexOf(document.activeElement)) - 1;
+    },
+    init: function init() {
+      var _this2 = this;
+
+      this.$watch('show', function (value) {
+        if (value) {
+          document.body.classList.add('overflow-y-hidden');
+        } else {
+          document.body.classList.remove('overflow-y-hidden');
+          setTimeout(function () {
+            _this2.activeComponent = false;
+
+            _this2.$wire.resetState();
+          }, 300);
+        }
+      });
+      window.livewire.on('closeModal', function () {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var skipPreviousModals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+        _this2.closeModal(force, skipPreviousModals);
+      });
+      window.livewire.on('activeModalComponentChanged', function (id) {
+        _this2.setActiveModalComponent(id);
+      });
+    }
+  };
+};
 
 /***/ }),
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 
 class Quote extends Model
 {
@@ -16,8 +17,8 @@ class Quote extends Model
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
-    public function user()
+    public function publisher()
     {
-        return $this->belongsTo('App\Models\User', 'author_id', 'id');
+        return $this->belongsTo('App\Models\User', 'publisher_id', 'id');
     }
 }

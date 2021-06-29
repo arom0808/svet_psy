@@ -39,6 +39,12 @@
                 </div>
             </div>
 
+            @if(request()->routeIs('quotes'))
+                <svg xmlns="http://www.w3.org/2000/svg" wire:click="$emit('openModal', 'categories-list')" width="20" height="20" fill="none" viewBox="0 0 24 24" class="cursor-pointer self-center rounded-full hover:bg-gray-800 hover:text-white" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+            @endif()
+
             @if(Auth::check())
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <!-- Teams Dropdown -->
@@ -156,7 +162,8 @@
                         </x-jet-dropdown>
                     </div>
                 </div>
-        @endif
+{{--            @else--}}
+            @endif
 
         <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -174,7 +181,6 @@
         </div>
     </div>
 
-@if(Auth::check())
     <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
@@ -198,6 +204,7 @@
                 </x-jet-responsive-nav-link>
             </div>
 
+        @if(Auth::check())
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="flex items-center px-4">
@@ -273,6 +280,6 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
-    @endif
 </nav>

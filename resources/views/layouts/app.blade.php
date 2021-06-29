@@ -19,7 +19,6 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="m-0 font-sans antialiased">
-        @livewire('livewire-ui-modal')
         @livewireScripts
         <x-jet-banner />
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use LivewireUI\Modal\ModalComponent;
+use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Facades\Log;
 
-class CategoriesList extends ModalComponent
+class CategoriesList extends Component
 {
     public $selected = [];
 

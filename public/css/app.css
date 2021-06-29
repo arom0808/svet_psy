@@ -1220,14 +1220,8 @@ select {
 .mt-16 {
 	margin-top: 4rem;
 }
-.mb-2 {
-	margin-bottom: 0.5rem;
-}
 .mr-16 {
 	margin-right: 4rem;
-}
-.mr-4 {
-	margin-right: 1rem;
 }
 .block {
 	display: block;
@@ -1345,9 +1339,6 @@ select {
 }
 .max-w-md {
 	max-width: 28rem;
-}
-.max-w-2xl {
-	max-width: 42rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1727,14 +1718,11 @@ select {
 .pt-32 {
 	padding-top: 8rem;
 }
-.pl-1 {
-	padding-left: 0.25rem;
-}
 .pb-10 {
 	padding-bottom: 2.5rem;
 }
-.pb-5 {
-	padding-bottom: 1.25rem;
+.pl-1 {
+	padding-left: 0.25rem;
 }
 .text-left {
 	text-align: left;
@@ -2355,11 +2343,6 @@ select {
 	.sm\:py-4 {
 		padding-top: 1rem;
 		padding-bottom: 1rem;
-	}
-
-	.sm\:px-4 {
-		padding-left: 1rem;
-		padding-right: 1rem;
 	}
 
 	.sm\:pt-0 {

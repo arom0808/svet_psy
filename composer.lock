@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4eef435f26072c83d12dc294d8b1eb0b",
+    "content-hash": "6e86bc83baf9e25022b6d9e850b013d0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1771,116 +1771,6 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
-        },
-        {
-            "name": "livewire-ui/livewire-ui",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire-ui/livewire-ui.git",
-                "reference": "4cb14e029376de0025a9a255cbdba0299ea11218"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire-ui/livewire-ui/zipball/4cb14e029376de0025a9a255cbdba0299ea11218",
-                "reference": "4cb14e029376de0025a9a255cbdba0299ea11218",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^8.0",
-                "php": "^7.4|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LivewireUI\\LivewireUIServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LivewireUI\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philo Hermans",
-                    "email": "me@philohermans.com"
-                }
-            ],
-            "description": "Laravel Livewire components library.",
-            "keywords": [
-                "laravel",
-                "livewire"
-            ],
-            "support": {
-                "issues": "https://github.com/livewire-ui/livewire-ui/issues",
-                "source": "https://github.com/livewire-ui/livewire-ui/tree/0.1.0"
-            },
-            "time": "2021-04-01T11:57:18+00:00"
-        },
-        {
-            "name": "livewire-ui/modal",
-            "version": "0.1.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire-ui/modal.git",
-                "reference": "cd361af7edf9d333962889ebd0635cb363a2c5eb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire-ui/modal/zipball/cd361af7edf9d333962889ebd0635cb363a2c5eb",
-                "reference": "cd361af7edf9d333962889ebd0635cb363a2c5eb",
-                "shasum": ""
-            },
-            "require": {
-                "livewire-ui/livewire-ui": "^0.1.0",
-                "livewire/livewire": "^2.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.15",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LivewireUI\\Modal\\LivewireModalServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LivewireUI\\Modal\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philo Hermans",
-                    "email": "me@philohermans.com"
-                }
-            ],
-            "description": "Laravel Livewire UI component",
-            "keywords": [
-                "laravel",
-                "livewire",
-                "modal"
-            ],
-            "support": {
-                "issues": "https://github.com/livewire-ui/modal/issues",
-                "source": "https://github.com/livewire-ui/modal/tree/0.1.7"
-            },
-            "time": "2021-06-19T12:56:55+00:00"
         },
         {
             "name": "livewire/livewire",

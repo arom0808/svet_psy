@@ -17,9 +17,9 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireScripts
     </head>
     <body class="m-0 font-sans antialiased">
-        @livewireScripts
         <x-jet-banner />
 
         <div class="m-0 min-h-screen bg-gray-100">

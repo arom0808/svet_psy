@@ -1129,6 +1129,9 @@ select {
 .m-0 {
 	margin: 0px;
 }
+.m-40 {
+	margin: 10rem;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1270,6 +1273,9 @@ select {
 }
 .h-screen {
 	height: 100vh;
+}
+.h-full {
+	height: 100%;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1459,14 +1465,23 @@ select {
 .self-center {
 	align-self: center;
 }
+.overflow-auto {
+	overflow: auto;
+}
 .overflow-hidden {
 	overflow: hidden;
 }
 .overflow-y-auto {
 	overflow-y: auto;
 }
+.overflow-x-hidden {
+	overflow-x: hidden;
+}
 .overflow-y-hidden {
 	overflow-y: hidden;
+}
+.overflow-y-scroll {
+	overflow-y: scroll;
 }
 .truncate {
 	overflow: hidden;
@@ -1603,6 +1618,10 @@ select {
 .bg-yellow-300 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(252, 211, 77, var(--tw-bg-opacity));
+}
+.bg-black {
+	--tw-bg-opacity: 1;
+	background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;

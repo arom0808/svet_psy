@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Quote;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class QuotesList extends Component
 {
@@ -14,12 +12,14 @@ class QuotesList extends Component
 
     protected $listeners = [
         'load-more' => 'loadMore',
-        'selectCategory'
+        'select-category' => 'selectCategory'
     ];
 
     public function loadMore()
     {
-        $this->limitPerPage += 6;
+        if($this->limitPerPage<Quote::count()) {
+            $this->limitPerPage += 6;
+        }
     }
 
     public function selectCategory($id){
@@ -33,15 +33,24 @@ class QuotesList extends Component
 
     public function render()
     {
-        Log::debug($this->selected);
         if(empty($this->selected)) {
             $quotes = Quote::latest()->paginate($this->limitPerPage);
         }
         else{
             $selected_keys = array_keys($this->selected);
-            $quotes = Quote::where('category_id','=',$selected_keys[0]);
+            if($selected_keys[0]==-1){
+                $quotes = Quote::where('category_id','=',null);
+            }
+            else{
+                $quotes = Quote::where('category_id','=',$selected_keys[0]);
+            }
             for($i = 1; $i < count($selected_keys); ++$i) {
-                $quotes = $quotes->orWhere('category_id','=',$selected_keys[$i]);
+                if($selected_keys[$i]==-1){
+                    $quotes = $quotes->orWhere('category_id','=',null);
+                }
+                else{
+                    $quotes = $quotes->orWhere('category_id','=',$selected_keys[$i]);
+                }
             }
             $quotes = $quotes->latest()->paginate($this->limitPerPage);
         }

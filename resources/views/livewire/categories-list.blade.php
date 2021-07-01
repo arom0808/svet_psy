@@ -22,11 +22,11 @@
     selectedCategories = [];
     window.livewire.on('open-categories-modal', function() {
         modal.style.display = "block";
-        bodyComponent.style.overflowY = "hidden";
+        bodyComponent.style.overflow = "hidden";
     });
     window.livewire.on('hide-categories-modal', function() {
         modal.style.display = "none";
-        bodyComponent.style.overflowY = "scroll";
+        bodyComponent.style.overflow = "auto";
     });
     window.livewire.on('select-category', categoryId => {
         categoryIndex = selectedCategories.indexOf(categoryId);

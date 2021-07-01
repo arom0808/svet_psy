@@ -19,7 +19,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         @livewireScripts
     </head>
-    <body class="m-0 font-sans antialiased overflow-y-scroll overflow-x-hidden">
+    <body class="m-0 font-sans antialiased">
         <x-jet-banner />
 
         <div class="m-0 min-h-screen bg-gray-100">

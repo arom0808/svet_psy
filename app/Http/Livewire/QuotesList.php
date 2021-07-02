@@ -7,8 +7,14 @@ use App\Models\Quote;
 
 class QuotesList extends Component
 {
-    public $limitPerPage = 9;
-    public $selected = [];
+    public $limitPerPage;
+    public $selectedCategories;
+
+    function mount()
+    {
+        $this->limitPerPage = 12;
+        $this->selectedCategories = [];
+    }
 
     protected $listeners = [
         'load-more' => 'loadMore',
@@ -18,38 +24,38 @@ class QuotesList extends Component
     public function loadMore()
     {
         if($this->limitPerPage<Quote::count()) {
-            $this->limitPerPage += 6;
+            $this->limitPerPage += 12;
         }
     }
 
     public function selectCategory($id){
-        if(array_key_exists($id,$this->selected)) {
-            unset($this->selected[$id]);
+        if(array_key_exists($id,$this->selectedCategories)) {
+            unset($this->selectedCategories[$id]);
         }
         else{
-            $this->selected[$id] = $id;
+            $this->selectedCategories[$id] = $id;
         }
     }
 
     public function render()
     {
-        if(empty($this->selected)) {
+        if(empty($this->selectedCategories)) {
             $quotes = Quote::latest()->paginate($this->limitPerPage);
         }
         else{
-            $selected_keys = array_keys($this->selected);
-            if($selected_keys[0]==-1){
+            $selectedCategories_keys = array_keys($this->selectedCategories);
+            if($selectedCategories_keys[0]==-1){
                 $quotes = Quote::where('category_id','=',null);
             }
             else{
-                $quotes = Quote::where('category_id','=',$selected_keys[0]);
+                $quotes = Quote::where('category_id','=',$selectedCategories_keys[0]);
             }
-            for($i = 1; $i < count($selected_keys); ++$i) {
-                if($selected_keys[$i]==-1){
+            for($i = 1; $i < count($selectedCategories_keys); ++$i) {
+                if($selectedCategories_keys[$i]==-1){
                     $quotes = $quotes->orWhere('category_id','=',null);
                 }
                 else{
-                    $quotes = $quotes->orWhere('category_id','=',$selected_keys[$i]);
+                    $quotes = $quotes->orWhere('category_id','=',$selectedCategories_keys[$i]);
                 }
             }
             $quotes = $quotes->latest()->paginate($this->limitPerPage);

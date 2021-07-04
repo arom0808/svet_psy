@@ -3,9 +3,9 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Quote;
+use App\Models\Category;
 
-class QuotesList extends Component
+class QuotesCategoriesList extends Component
 {
     public $limitPerPage;
 
@@ -20,15 +20,15 @@ class QuotesList extends Component
 
     public function loadMore()
     {
-        if($this->limitPerPage<Quote::count()) {
+        if($this->limitPerPage<Category::count()) {
             $this->limitPerPage += 12;
         }
     }
 
     public function render()
     {
-        $quotes = Quote::latest()->paginate($this->limitPerPage);
+        $categories = Category::orderBy('name')->paginate($this->limitPerPage);
         $this->emit('userStore');
-        return view('livewire.quotes-list', ['quotes' => $quotes]);
+        return view('livewire.quotes-categories-list', ['categories' => $categories]);
     }
 }

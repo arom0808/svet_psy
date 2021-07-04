@@ -1,14 +1,44 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use Illuminate\Http\Request;
+use Illuminate\Console\Command;
 use App\Models\Quote;
 use App\Models\Category;
 
-class TestController extends Controller
+class TestInit extends Command
 {
-    public function TestInit(){
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'test:init';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Making test data in DB';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
         for($i = -1; $i < 4; ++$i){
             if($i > -1 ){
                 $category = Category::create(['name'=>strval($i)]);

@@ -19,7 +19,8 @@
                     </span>
                     <span class="font-semibold text-indigo-500 text-sm">
                         {{$quotes[$j]->publisher->name}}@if($quotes[$j]->category),
-                        <a href="{{ route('quotes-category', ['categoryId' => $quotes[$j]->category->id]) }}">{{$quotes[$j]->category->name}}</a>@endif
+                        <a
+                            href="{{ route('quotes-category', ['categoryId' => $quotes[$j]->category->id]) }}">{{$quotes[$j]->category->name}}</a>@endif
                     </span>
                 </div>
             </div>

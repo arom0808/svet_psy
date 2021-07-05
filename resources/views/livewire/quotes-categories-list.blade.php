@@ -3,7 +3,7 @@
     @for ($i = 0; $i < count($categories); $i += 3)
         <div class="w-full flex flex-col md:flex-row gap-4 mb-8 md:mb-0 flex-between items-center p-8 m-4">
             @for ($j = $i; $j < min($i + 3, count($categories)); ++$j)
-                <a href="{{ route('quotes-category', ['id' => $categories[$j]->id]) }}" class="w-72 mx-auto">
+                <a href="{{ route('quotes-category', ['categoryId' => $categories[$j]->id]) }}" class="w-72 mx-auto">
                     <div class="bg-white dark:bg-gray-800 w-72 shadow-lg mx-auto rounded-xl p-4">
                         <p class="text-gray-600 dark:text-white text-center">{{ $categories[$j]->name }}</p>
                     </div>

@@ -17,7 +17,7 @@ class CreateQuotesTable extends Migration
             $table->id();
             $table->text('text');
             $table->foreignId('publisher_id')->constrained('users');
-            $table->foreignId('category_id')->nullable()->constrained('categories');
+            $table->string('category');
             $table->boolean('isQuoteOfDay')->default(false);
             $table->string('author');
             $table->timestamps();

@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('quotes') }}" :active="request()->routeIs('quotes') || request()->routeIs('quotes-categories') || request()->routeIs('quotes-category')">
+                    <x-jet-nav-link href="{{ route('quotes') }}" :active="request()->routeIs('quotes')">
                         {{ __('Цитаты') }}
                     </x-jet-nav-link>
                 </div>

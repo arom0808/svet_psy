@@ -2,9 +2,9 @@
     <div class="header flex items-end justify-between mb-12">
         <div class="title">
             <p class="text-4xl font-bold text-gray-800 mb-4"> Lastest articles </p>
-            <p class="text-2xl font-light text-gray-400">
+            {{-- <p class="text-2xl font-light text-gray-400">
                 All article are verified by 2 experts and valdiate by the CTO
-            </p>
+            </p> --}}
         </div>
         <div class="text-end">
             <form class="flex w-full max-w-sm space-x-3">

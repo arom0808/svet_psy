@@ -17,12 +17,6 @@ Route::view('/', 'home')->name("home");
 
 Route::view('/quotes', 'quotes')->name("quotes");
 
-Route::view('/quotes/categories', 'quotes-categories')->name("quotes-categories");
-
-Route::get('/quotes/categories/{categoryId}', function ($categoryId) {
-    return view('quotes-category', ['categoryId'=>$categoryId]);
-})->name("quotes-category");
-
 Route::view('/articles', 'articles')->name("articles");
 
 Route::view('/about-me', 'about-me')->name("about-me");

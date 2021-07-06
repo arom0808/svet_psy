@@ -39,8 +39,8 @@ class TestInit extends Command
      */
     public function handle()
     {
-        for($i = -1; $i < 4; ++$i){
-            for($j = 0; $j < 4; ++$j){
+        for($i = -1; $i < 9; ++$i){
+            for($j = 0; $j < 9; ++$j){
                 Quote::create(['text'=>(strval($i) . strval($j)), 'publisher_id'=>1, 'category'=>strval($i), 'author'=>'Великий Роман Анодин']);
             }
         }

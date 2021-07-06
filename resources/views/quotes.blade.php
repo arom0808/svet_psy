@@ -1,3 +1,7 @@
 <x-app-layout>
-    @livewire('quotes-list')
+    @if(isset($searchExpression))
+        @livewire('quotes-list', ['searchExpression'=>$searchExpression])
+    @else
+        @livewire('quotes-list')
+    @endif
 </x-app-layout>

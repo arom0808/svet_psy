@@ -7,14 +7,7 @@ use App\Models\Quote;
 
 class QuotesList extends Component
 {
-    public $limitPerPage;
-    public $searchExpression;
-
-    function mount()
-    {
-        $this->limitPerPage = 24;
-        $this->searchExpression = "";
-    }
+    public $limitPerPage = 24, $searchExpression = "";
 
     protected $listeners = [
         'load-more' => 'loadMore'
@@ -48,6 +41,6 @@ class QuotesList extends Component
                 ->latest()->paginate($this->limitPerPage);
         }
         $this->emit('userStore');
-        return view('livewire.quotes-list', ['quotes' => $quotes]);
+        return view('livewire.quotes-list', ['searchExpression' => $this->searchExpression, 'quotes' => $quotes]);
     }
 }

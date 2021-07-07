@@ -1,6 +1,6 @@
 <div class="w-full bg-white" id="quotes_list">
     <div class="bg-white header flex justify-center m-12 flex-col items-center sm:flex-row sm:justify-between">
-        <p class="title text-4xl font-bold text-gray-800 mb-4"> Lastest quotes </p>
+        <p class="title text-4xl font-bold text-gray-800 mb-4"> Последние цитаты </p>
         <div class="text-end">
             {{-- <form class="flex w-full max-w-sm space-x-3"> --}}
                 <div class=" relative ">

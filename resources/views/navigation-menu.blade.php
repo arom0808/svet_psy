@@ -18,13 +18,13 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('quotes') }}" :active="request()->routeIs('quotes')">
+                    <x-jet-nav-link href="{{ route('quotes') }}" :active="request()->routeIs('quotes') || request()->routeIs('quotes_search')">
                         {{ __('Цитаты') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">
+                    <x-jet-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles') || request()->routeIs('articles_search')">
                         {{ __('Статьи') }}
                     </x-jet-nav-link>
                 </div>

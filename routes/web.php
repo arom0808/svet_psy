@@ -17,10 +17,14 @@ Route::view('/', 'home')->name("home");
 
 Route::view('/quotes', 'quotes')->name("quotes");
 
-Route::get('/quotes/{searchExpression}', function ($searchExpression) {
+Route::get('/quotes/search/{searchExpression}', function ($searchExpression) {
     return view('quotes', ['searchExpression' => $searchExpression]);
 })->name("quotes_search");
 
 Route::view('/articles', 'articles')->name("articles");
+
+Route::get('/articles/search/{searchExpression}', function ($searchExpression) {
+    return view('articles', ['searchExpression' => $searchExpression]);
+})->name("articles_search");
 
 Route::view('/about-me', 'about-me')->name("about-me");

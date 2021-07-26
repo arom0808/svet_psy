@@ -72,8 +72,8 @@ class TestInit extends Command
                                "The new supercar is here, 543 cv and 140 000$ !!",
                                "The new supercar is here, 543 cv and 140 000$ !!",
                                "The new supercar is here, 543 cv and 140 000$ !!"];
-        $times_to_read = [Carbon::createFromTime(0,1), Carbon::createFromTime(0,2), Carbon::createFromTime(0,3),
-                          Carbon::createFromTime(0,4), Carbon::createFromTime(0,5), Carbon::createFromTime(0,6)];
+        $times_to_read = [ Carbon::create(0,1,1,0,1), Carbon::create(0,1,1,0,2), Carbon::create(0,1,1,0,3),
+                          Carbon::create(0,1,1,0,4), Carbon::create(0,1,1,0,5), Carbon::create(0,1,1,0,6)];
         for($i = 0; $i < 10; ++$i){
             for($j = 0; $j < 6; ++$j){
                 Article::create(['preview_photo_path'=>$preview_photo_paths[$j], 'category' => $categories[$j], 'title' => $titles[$j], 'short_description' => $short_descriptions[$j], 'publisher_id' => 1, 'time_to_read' => $times_to_read[$j], 'html'=>""]);

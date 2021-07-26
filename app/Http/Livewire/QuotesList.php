@@ -10,7 +10,8 @@ class QuotesList extends Component
     public $limitPerPage = 24, $searchExpression = "";
 
     protected $listeners = [
-        'load-more' => 'loadMore'
+        'load-more' => 'loadMore',
+        'search' => 'search'
     ];
 
     public function loadMore()

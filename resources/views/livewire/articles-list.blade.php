@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
     @foreach ($articles as $article)
-        <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+        <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer mx-auto my-6">
             <a href="{{ route('article', $article->id) }}" class="w-full block h-full">
                 <img alt="blog photo" src="{{ $article->preview_photo_path }}" class="max-h-40 w-full object-cover" />
                 <div class="bg-white dark:bg-gray-800 w-full p-4">
@@ -12,7 +12,7 @@
                     <div class="flex items-center mt-4">
                         <div class="block relative">
                             <img alt="profil" src="{{ $article->publisher->profile_photo_url }}"
-                                class="mx-auto object-cover rounded-full h-10 w-10 " />
+                                class="object-cover rounded-full" />
                         </div>
                         <div class="flex flex-col justify-between ml-4 text-sm">
                             <p class="text-gray-800 dark:text-white">

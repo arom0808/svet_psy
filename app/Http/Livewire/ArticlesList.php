@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Article;
-use Carbon\Carbon;
 
 class ArticlesList extends Component
 {

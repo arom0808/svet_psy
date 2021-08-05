@@ -67,6 +67,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Quote', 'publisher_id', 'id');
     }
-
-
 }

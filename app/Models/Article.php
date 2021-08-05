@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -14,6 +15,4 @@ class Article extends Model
     {
         return $this->belongsTo('App\Models\User', 'publisher_id', 'id');
     }
-
-    use HasFactory;
 }

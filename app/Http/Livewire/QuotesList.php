@@ -6,8 +6,7 @@ use Livewire\Component;
 use App\Models\Quote;
 
 class QuotesList extends Component
-{
-    public $limitPerPage = 24, $searchExpression = "";
+{public $limitPerPage = 24, $searchExpression = "";
 
     protected $listeners = [
         'load-more' => 'loadMore',

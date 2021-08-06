@@ -104,6 +104,10 @@ class TestInit extends Command
                 $user->is_admin = true;
                 $user->save();
             }
+            if ($i % 3 === 0) {
+                $user->is_banned = true;
+                $user->save();
+            }
         }
         for ($i = -1; $i < 9; ++$i) {
             for ($j = 0; $j < 9; ++$j) {

@@ -1,5 +1,4 @@
 @php
-use Illuminate\Support\Facades\Log;
 $page_number = $page_index;
 $pages_arr = [];
 if ($pages_count <= 7) {
@@ -99,9 +98,17 @@ if ($pages_count <= 7) {
                                         {{ $user->id }}
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $user->name }}
-                                        </p>
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <img alt="profil" src="{{ $user->getProfilePhotoUrlAttribute() }}"
+                                                    class="mx-auto object-cover rounded-full h-10 w-10 " />
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    {{ $user->name }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
@@ -123,7 +130,8 @@ if ($pages_count <= 7) {
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <a href="{{ route('admin_user', ['id' => $user->id]) }}"
+                                            class="text-indigo-600 hover:text-indigo-900">
                                             Edit
                                         </a>
                                     </td>
@@ -165,7 +173,7 @@ if ($pages_count <= 7) {
                                         border-t border-b text-base text-indigo-500 bg-white hover:bg-gray-100 ">
                                         {{ substr($page_str, 1) }}
                                     </button>
-            @else
+        @else
                                     <a href='{{ route('admin_users') . '?page=' . $page_str . ($search_expression === '' ? '' : '&search=' . $search_expression) }}'
                                         class=" w-full px-4 py-2 border text-base text-gray-600 bg-white
                                         hover:bg-gray-100">

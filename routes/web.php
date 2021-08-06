@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Actions\Fortify\ResetUserPassword;
 use Illuminate\Support\Facades\Log;
 
 /*
@@ -49,6 +50,9 @@ Route::get('/admin', function () {
 })->name('admin')->middleware('auth');
 
 Route::get('/admin/users', function () {
+    if (Auth::user()->is_admin === 0) {
+        return redirect('/');
+    }
     $search_expression = request()->input('search');
     if (is_null($search_expression)) {
         $search_expression = "";
@@ -59,28 +63,42 @@ Route::get('/admin/users', function () {
     }
     $pages_count = DB::table('users');
     if ($search_expression != "") {
-        $pages_count = $pages_count->where('name', 'like', '%'.$search_expression.'%')->orWhere('email', 'like', '%'.$search_expression.'%');
+        $pages_count = $pages_count->where('name', 'like', '%' . $search_expression . '%')->orWhere('email', 'like', '%' . $search_expression . '%');
     }
     $pages_count = $pages_count->count();
     if ($pages_count % 5 != 0) {
         $pages_count += 5 - $pages_count % 5;
     }
-    Log::info($pages_count);
     $pages_count /= 5;
     if ($page_index < 1 || $page_index > $pages_count) {
         return view('errors.404');
     }
-    $users = DB::table('users')->orderBy('id')->select('id', 'name', 'email', 'is_admin', 'created_at')->offset($page_index * 5 - 5)->limit(5);
+    $users = User::orderBy('id')->select('id', 'name', 'email', 'is_admin', 'created_at')->offset($page_index * 5 - 5)->limit(5);
     if ($search_expression != "") {
-        $users = $users->where('name', 'like', '%'.$search_expression.'%')->orWhere('email', 'like', '%'.$search_expression.'%');
+        $users = $users->where('name', 'like', '%' . $search_expression . '%')->orWhere('email', 'like', '%' . $search_expression . '%');
     }
     $users = $users->get();
-    return ((Auth::user()->is_admin === 1) ? view('admin_users', ['users' => $users, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index]) : redirect('/'));
+    return view('admin_users', ['users' => $users, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index]);
 })->name('admin_users')->middleware('auth');
 
 Route::get('/admin/users/{id}', function ($id) {
-    return ((Auth::user()->is_admin === 1) ? (User::where('id', $id)->exists() ? view('admin_user', ['id' => $id]) : view('errors/404')) : redirect('/'));
+    return ((Auth::user()->is_admin === 1) ? (User::where('id', $id)->exists() ? view('admin_user', ['user' => User::where('id', $id)->first()]) : view('errors/404')) : redirect('/'));
 })->name('admin_user')->middleware('auth');
+
+// Route::post('/admin/api/resetUserPassword/{id}', function ($id) {
+//     if (Auth::user()->is_admin === 0) {
+//         return redirect('/');
+//     }
+//     if (User::where('id', $id)->doesntExist()) {
+//         return view('errors/404');
+//     }
+//     $password = request()->input('password');
+//     if (is_null($password)) {
+//         $password="";
+//     }
+//     $resetUserPassword = new ResetUserPassword();
+//     $resetUserPassword->reset(User::where('id', $id)->first(), ['password' => $password]);
+// })->name('admin_api_reset_user_password')->middleware('auth');
 
 Route::get('/admin/quotes', function () {
     return ((Auth::user()->is_admin === 1) ? view('admin_quotes') : redirect('/'));

@@ -27,7 +27,8 @@
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('admin_articles') }}" :active="request()->is('admin/articles*')">
+                        <x-jet-nav-link href="{{ route('admin_articles') }}"
+                            :active="request()->is('admin/articles*')">
                             {{ __('Статьи') }}
                         </x-jet-nav-link>
                     </div>
@@ -53,7 +54,7 @@
                         </x-jet-nav-link>
                     </div>
 
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex whitespace-nowrap">
                         <x-jet-nav-link href="{{ route('about-me') }}" :active="request()->routeIs('about-me')">
                             {{ __('Обо мне') }}
                         </x-jet-nav-link>
@@ -193,7 +194,11 @@
                         </x-jet-dropdown>
                     </div>
                 </div>
-                {{-- @else --}}
+            @else
+                <div class="flex items-center">
+                    <a href="{{ route('login') }}" class="pr-2 hidden text-xs sm:flex">Войти</a>
+                    <a href="{{ route('register') }}" class="pl-2 hidden text-xs sm:flex">Зарегестрироваться</a>
+                </div>
             @endif
 
             <!-- Hamburger -->
@@ -226,12 +231,14 @@
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('admin_quotes') }}" :active="request()->is('admin/quotes*')">
+                <x-jet-responsive-nav-link href="{{ route('admin_quotes') }}"
+                    :active="request()->is('admin/quotes*')">
                     {{ __('Цитаты') }}
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('admin_quotes') }}" :active="request()->is('admin/articles*')">
+                <x-jet-responsive-nav-link href="{{ route('admin_quotes') }}"
+                    :active="request()->is('admin/articles*')">
                     {{ __('Статьи') }}
                 </x-jet-responsive-nav-link>
             </div>
@@ -266,9 +273,9 @@
                 @endif
             @endif
         @endif
-        @if (Auth::check())
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200">
+        <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            @if (Auth::check())
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="flex-shrink-0 mr-3">
@@ -340,7 +347,14 @@
                         @endforeach
                     @endif
                 </div>
-            </div>
-        @endif
+            @else
+                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                    {{ __('Войти') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    {{ __('Зарегестрироваться') }}
+                </x-jet-responsive-nav-link>
+            @endif
+        </div>
     </div>
 </nav>

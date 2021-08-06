@@ -8,7 +8,7 @@
                 </p>
                 <div class="flex items-center mt-4">
                     <div class="block relative">
-                        <img alt="profile" src="{{ $quote->publisher->profile_photo_url }}"
+                        <img alt="profile" src="{{ $quote->publisher->getProfilePhotoUrlAttribute() }}"
                             class="mx-auto object-cover rounded-full h-10 w-10 " />
                     </div>
                     <div class="flex flex-col ml-2 justify-between">

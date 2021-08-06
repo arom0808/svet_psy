@@ -11,8 +11,8 @@
                     </p>
                     <div class="flex items-center mt-4">
                         <div class="block relative">
-                            <img alt="profil" src="{{ $article->publisher->profile_photo_url }}"
-                                class="object-cover rounded-full" />
+                            <img alt="profil" src="{{ $article->publisher->getProfilePhotoUrlAttribute() }}"
+                                class="h-10 w-10 rounded-full object-cover" />
                         </div>
                         <div class="flex flex-col justify-between ml-4 text-sm">
                             <p class="text-gray-800 dark:text-white">

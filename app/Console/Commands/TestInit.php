@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
-use Exception;
-use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Database\QueryException;
+
 
 class TestInit extends Command
 {
@@ -60,55 +58,13 @@ class TestInit extends Command
         ]);
         $user->is_admin = true;
         $user->save();
-        for ($i = 0; $i < rand(200, 500); ++$i) {
-            $generate_name_func = function () {
-                $first_characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $last_characters = 'abcdefghijklmnopqrstuvwxyz';
-                $randomString = '';
-                $randomString .= $first_characters[rand(0, strlen($first_characters) - 1)];
-                $charactersLength = strlen($last_characters);
-                for ($j = 0; $j < rand(2, 9); $j++) {
-                    $randomString .= $last_characters[rand(0, $charactersLength - 1)];
-                }
-                return $randomString;
-            };
-            $generate_email_func = function () {
-                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $charactersLength = strlen($characters);
-                $randomString = '';
-                for ($j = 0; $j < rand(2, 9); $j++) {
-                    $randomString .= $characters[rand(0, $charactersLength - 1)];
-                }
-                $randomString .= '@';
-                for ($j = 0; $j < rand(2, 5); $j++) {
-                    $randomString .= $characters[rand(0, $charactersLength - 1)];
-                }
-                $randomString .= '.';
-                for ($j = 0; $j < rand(2, 3); $j++) {
-                    $randomString .= $characters[rand(0, $charactersLength - 1)];
-                }
-                return $randomString;
-            };
-            $email = $generate_email_func();
-            if (User::where('email', $email)->exists()) {
-                continue;
-                echo 'ssss';
+        DB::transaction(function () {
+            for ($i = 0; $i < 100000; ++$i) {
+                $user = DB::insert('insert into users (name, email, email_verified_at, password, two_factor_secret, two_factor_recovery_codes, remember_token, current_team_id, profile_photo_path, is_admin, is_banned) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    [strval($i) . strval(rand(0, 100)), strval($i) . strval($i), null, '$2y$10$pqBRRs/rbQ3HEoETxBQpauHWvpN8.lUL5HxZsfHKmg.LkJBjgx3Ya', null, null, null, null, null, $i % 2 === 0, $i % 3 === 0]);
+                echo strval($i)." ";
             }
-            $user = User::create([
-                'name' => $generate_name_func(), 'email' => $email, 'email_verified_at' => null,
-                'password' => '$2y$10$pqBRRs/rbQ3HEoETxBQpauHWvpN8.lUL5HxZsfHKmg.LkJBjgx3Ya',
-                'two_factor_secret' => null, 'two_factor_recovery_codes' => null, 'remember_token' => null,
-                'current_team_id' => null, 'profile_photo_path' => null
-            ]);
-            if ($i % 2 === 0) {
-                $user->is_admin = true;
-                $user->save();
-            }
-            if ($i % 3 === 0) {
-                $user->is_banned = true;
-                $user->save();
-            }
-        }
+        });
         for ($i = -1; $i < 9; ++$i) {
             for ($j = 0; $j < 9; ++$j) {
                 Quote::create(['text' => (strval($i) . strval($j) . "abcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifgabcdifg"), 'publisher_id' => 1, 'category' => strval($i), 'author' => 'Великий Роман Анодин']);

@@ -42,7 +42,7 @@ if ($pages_count <= 7) {
 
 <x-app-layout>
     <div>
-        <div class="flex absolute w-full z-10" style="height: 90%">
+        {{-- <div class="flex absolute w-full z-10" style="height: 90%">
             <div class="relative shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto">
                 <div class="w-full h-full text-center">
                     <div class="flex h-full flex-col justify-between">
@@ -71,7 +71,7 @@ if ($pages_count <= 7) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="container mx-auto px-4 sm:px-8 max-w-3xl">
             <div class="py-8">
                 <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">

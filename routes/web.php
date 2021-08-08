@@ -26,6 +26,14 @@ Route::middleware('admin')->group(function () {
 
     Route::view('/admin/quotes', 'admin_quotes')->name('admin_quotes');
 
-    Route::view('/admin/articles', 'admin_articles')->name('admin_articles');
+    Route::get('/admin/articles', [AdminController::class, "articles"])->name('admin_articles');
+
+    Route::view('/admin/articles/new', "admin_new_article")->name('admin_new_article');
+
+    Route::post('/admin/articles/new', [AdminController::class, "newArticlePOST"])->name('admin_new_article_post');
+
+    Route::get('/admin/article/{id}', [AdminController::class, "article"])->name('admin_article');
+
+    Route::post('/admin/article/{id}', [AdminController::class, "articlePOST"])->name("admin_article_post");
 });
 

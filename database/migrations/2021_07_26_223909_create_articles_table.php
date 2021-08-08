@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('short_description');
             $table->foreignId('publisher_id')->constrained('users');
             $table->time("time_to_read");
-            $table->text('html');
+            $table->string('html_file_path');
             $table->timestamps();
         });
     }

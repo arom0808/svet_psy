@@ -105,7 +105,7 @@ class TestInit extends Command
         ];
         for ($i = 0; $i < 10; ++$i) {
             for ($j = 0; $j < 6; ++$j) {
-                Article::create(['preview_photo_path' => $preview_photo_paths[$j], 'category' => $categories[$j], 'title' => $titles[$j], 'short_description' => $short_descriptions[$j], 'publisher_id' => 1, 'time_to_read' => $times_to_read[$j], 'html' => ""]);
+                Article::create(['preview_photo_path' => $preview_photo_paths[$j], 'category' => $categories[$j], 'title' => $titles[$j], 'short_description' => $short_descriptions[$j], 'publisher_id' => 1, 'time_to_read' => $times_to_read[$j], 'html_file_path' => ""]);
             }
         }
     }

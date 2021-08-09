@@ -32,8 +32,10 @@ Route::middleware('admin')->group(function () {
 
     Route::post('/admin/articles/new', [AdminController::class, "newArticlePOST"])->name('admin_new_article_post');
 
-    Route::get('/admin/article/{id}', [AdminController::class, "article"])->name('admin_article');
+    Route::get('/admin/articles/{id}', [AdminController::class, "article"])->name('admin_article');
 
-    Route::post('/admin/article/{id}', [AdminController::class, "articlePOST"])->name("admin_article_post");
+    Route::post('/admin/articles/{id}', [AdminController::class, "articlePOST"])->name("admin_article_post");
+
+    Route::post('/admin/articles/delete/{id}', [AdminController::class, "articleDelete"])->name('admin_article_delete');
 });
 

@@ -1,29 +1,30 @@
 <x-app-layout>
     <script src="https://cdn.tiny.cloud/1/qnxt4fjoc7e3sizw9clxdg99xfo7fbpz7pqgebcyh2g7zttr/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <form method="POST" action="{{ route('admin_article_post', $article->id) }}" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="callback" value="{{ url()->current() }}" />
-        {{-- <input type="hidden" name="publisher_id" value="{{ Auth::id() }}" /> --}}
-        <textarea name="html">
-                Hello world
-        </textarea>
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'code advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                setup: function(editor) {
-                    editor.on('init', function(e) {
-                        editor.setContent('{!! $html !!}', {
-                            format: 'html'
+    <section class="h-full bg-gray-100 bg-opacity-50">
+        <div class="container max-w-6xl mx-auto shadow-md md:w-3/4">
+            <div class="space-y-6 bg-white">
+                <img src="{{ $article->previewPhotoPathURL() }}" />
+                <form method="POST" action="{{ route('admin_article_post', $article->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="callback" value="{{ url()->current() }}" />
+                    <textarea name="html">
+                        Hello world
+                    </textarea>
+                    <script>
+                        tinymce.init({
+                            selector: 'textarea',
+                            plugins: 'code advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                            setup: function(editor) {
+                                editor.on('init', function(e) {
+                                    editor.setContent('{!! $html !!}', {
+                                        format: 'html'
+                                    });
+                                });
+                            }
                         });
-                    });
-                }
-            });
-        </script>
-        <section class="h-screen bg-gray-100 bg-opacity-50">
-            <div class="container max-w-2xl mx-auto shadow-md md:w-3/4">
-                <div class="space-y-6 bg-white">
+                    </script>
                     <div class="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
                         <h2 class="max-w-sm mx-auto md:w-1/3">
                             Новое Превью
@@ -44,7 +45,7 @@
                             <div class=" relative ">
                                 <input type="text"
                                     class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                    name="title" value="{{ $article->title }}"/>
+                                    name="title" value="{{ $article->title }}" />
                             </div>
                         </div>
                     </div>
@@ -56,7 +57,7 @@
                             <div class=" relative ">
                                 <input type="text"
                                     class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                    name="short_description" value="{{ $article->short_description }}"/>
+                                    name="short_description" value="{{ $article->short_description }}" />
                             </div>
                         </div>
                     </div>
@@ -101,8 +102,8 @@
                             Save
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
-        </section>
-    </form>
+        </div>
+    </section>
 </x-app-layout>

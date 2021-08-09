@@ -87,7 +87,7 @@ class TestInit extends Command
         $preview_photo_paths = [];
         foreach ($preview_photo_urls as $i => $preview_photo_url) {
             $disk->put('articles/preview_photos/' . strval($i + 1) . ".jpg", file_get_contents($preview_photo_url));
-            array_push($preview_photo_paths, Storage::url('articles/preview_photos/' . strval($i + 1) . ".jpg"));
+            array_push($preview_photo_paths, 'articles/preview_photos/' . strval($i + 1) . ".jpg");
         }
         $categories = ["Video", "Oui", "Oul", "OEL", "Trust", "Test"];
         $titles = ["Work at home", "Cofe braking", "Bloging", "Writeln", "Beautifuling", "Sport"];

@@ -31,7 +31,45 @@ class AdminController extends Controller
             $users = $users->where('name', 'like', '%' . $search_expression . '%')->orWhere('email', 'like', '%' . $search_expression . '%');
         }
         $users = $users->get();
-        return view('admin_users', ['users' => $users, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index]);
+        $page_number = $page_index;
+        $pages_arr = [];
+        if ($pages_count <= 7) {
+            for ($i = 1; $i <= $pages_count; ++$i) {
+                $pages_arr[$i - 1] = $i === $page_number ? '.' . strval($i) : strval($i);
+            }
+        } else {
+            $pages_arr = ['1', '', '', '', '', '', strval($pages_count)];
+            $current_page_array_index = 0;
+            if ($page_number <= 3) {
+                $current_page_array_index = $page_number - 1;
+            } elseif ($page_number >= $pages_count - 2) {
+                $current_page_array_index = $page_number - $pages_count - 1 + 7;
+            } else {
+                $current_page_array_index = 3;
+            }
+            if ($current_page_array_index === 0) {
+                $pages_arr = ['.1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 1) {
+                $pages_arr = ['1', '.2', '3', '4', '...', strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 2) {
+                $pages_arr = ['1', '2', '.3', '4', '5', '...', strval($pages_count)];
+            }
+            if ($current_page_array_index === 3) {
+                $pages_arr = ['1', '...', strval($page_number - 1), '.' . strval($page_number), strval($page_number + 1), '...', strval($pages_count)];
+            }
+            if ($current_page_array_index === 4) {
+                $pages_arr = ['1', '...', strval($pages_count - 4), strval($pages_count - 3), '.' . strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 5) {
+                $pages_arr = ['1', '2', '...', strval($pages_count - 3), strval($pages_count - 2), '.' . strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 6) {
+                $pages_arr = ['1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), '.' . strval($pages_count)];
+            }
+        }
+        return view('admin_users', ['users' => $users, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index, 'page_number' => $page_number, 'pages_arr' => $pages_arr]);
     }
 
     function articles(Request $request)
@@ -54,7 +92,45 @@ class AdminController extends Controller
                 ->orWhere('title', 'like', '%' . $search_expression . '%')->orWhere('short_description', 'like', '%' . $search_expression . '%');
         }
         $articles = $articles->get();
-        return view('admin_articles', ['articles' => $articles, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index]);
+        $page_number = $page_index;
+        $pages_arr = [];
+        if ($pages_count <= 7) {
+            for ($i = 1; $i <= $pages_count; ++$i) {
+                $pages_arr[$i - 1] = $i === $page_number ? '.' . strval($i) : strval($i);
+            }
+        } else {
+            $pages_arr = ['1', '', '', '', '', '', strval($pages_count)];
+            $current_page_array_index = 0;
+            if ($page_number <= 3) {
+                $current_page_array_index = $page_number - 1;
+            } elseif ($page_number >= $pages_count - 2) {
+                $current_page_array_index = $page_number - $pages_count - 1 + 7;
+            } else {
+                $current_page_array_index = 3;
+            }
+            if ($current_page_array_index === 0) {
+                $pages_arr = ['.1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 1) {
+                $pages_arr = ['1', '.2', '3', '4', '...', strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 2) {
+                $pages_arr = ['1', '2', '.3', '4', '5', '...', strval($pages_count)];
+            }
+            if ($current_page_array_index === 3) {
+                $pages_arr = ['1', '...', strval($page_number - 1), '.' . strval($page_number), strval($page_number + 1), '...', strval($pages_count)];
+            }
+            if ($current_page_array_index === 4) {
+                $pages_arr = ['1', '...', strval($pages_count - 4), strval($pages_count - 3), '.' . strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 5) {
+                $pages_arr = ['1', '2', '...', strval($pages_count - 3), strval($pages_count - 2), '.' . strval($pages_count - 1), strval($pages_count)];
+            }
+            if ($current_page_array_index === 6) {
+                $pages_arr = ['1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), '.' . strval($pages_count)];
+            }
+        }
+        return view('admin_articles', ['articles' => $articles, 'pages_count' => $pages_count, 'search_expression' => $search_expression, 'page_index' => $page_index, 'page_number' => $page_number, 'pages_arr' => $pages_arr]);
     }
 
     function newArticlePOST(Request $request)
@@ -88,26 +164,34 @@ class AdminController extends Controller
     {
         $article = Article::where('id', $id)->first();
         $preview_photo_path = $article->preview_photo_path;
-        Log::info(asset($preview_photo_path));
-        // if ($request->file('preview_file')) {
-        //     $preview_photo_path = $request->file('preview_file')->storeAs('articles/preview_photos', '', 'public');
-        // }
-        // $category = $request->input('category');
-        // $title = $request->input('title');
-        // $short_description = $request->input('short_description');
-        // $publisher_id = $request->input('publisher_id');
-        // $time_to_read = $request->input('time_to_read');
+        if ($request->file('preview_file')) {
+            Storage::delete([$preview_photo_path]);
+            $preview_photo_path = $request->file('preview_file')->store('articles/preview_photos', 'public');
+        }
+        $category = $request->input('category');
+        $title = $request->input('title');
+        $short_description = $request->input('short_description');
+        $time_to_read = $request->input('time_to_read');
         $html = $request->input('html');
-        // $html_file_path = Article::where('id', $id)->html_file_path;
-        // Storage::disk('public')->put($html_file_path, $html);
-        return view('admin_article', ['article' => $article, 'html' => $html]);
-        // return redirect($request->input('callback'));
+        $html_file_path = $article->html_file_path;
+        Storage::disk('public')->put($html_file_path, $html);
+        $article->update(
+            [
+                'preview_photo_path' => $preview_photo_path,
+                'category' => $category,
+                'title' => $title,
+                'short_description' => $short_description,
+                'time_to_read' => $time_to_read
+            ]
+        );
+        return redirect($request->input('callback'));
     }
 
-    // function articleChange(Request $request, $id)
-    // {
-    //     $request->file('preview_file')->store('public/files');
-    //     // $request->file('preview_file')->store(Article::select('preview_photo_path')->where('id, $id')->first()->preview_photo_path);
-    //     return redirect($request->input('callback'));
-    // }
+    function articleDelete(Request $request, $id)
+    {
+        $article = Article::where('id', $id)->first();
+        Storage::disk('public')->delete([$article->preview_photo_path, $article->html_file_path]);
+        $article->delete();
+        return redirect($request->input('callback'));
+    }
 }

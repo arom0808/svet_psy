@@ -1,47 +1,5 @@
-@php
-$page_number = $page_index;
-$pages_arr = [];
-if ($pages_count <= 7) {
-    for ($i = 1; $i <= $pages_count; ++$i) {
-        $pages_arr[$i - 1] = $i === $page_number ? '.' . strval($i) : strval($i);
-    }
-} else {
-    $pages_arr = ['1', '', '', '', '', '', strval($pages_count)];
-    $current_page_array_index = 0;
-    if ($page_number <= 3) {
-        $current_page_array_index = $page_number - 1;
-    } elseif ($page_number >= $pages_count - 2) {
-        $current_page_array_index = $page_number - $pages_count - 1 + 7;
-    } else {
-        $current_page_array_index = 3;
-    }
-    if ($current_page_array_index === 0) {
-        $pages_arr = ['.1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
-    }
-    if ($current_page_array_index === 1) {
-        $pages_arr = ['1', '.2', '3', '4', '...', strval($pages_count - 1), strval($pages_count)];
-    }
-    if ($current_page_array_index === 2) {
-        $pages_arr = ['1', '2', '.3', '4', '5', '...', strval($pages_count)];
-    }
-    if ($current_page_array_index === 3) {
-        $pages_arr = ['1', '...', strval($page_number - 1), '.' . strval($page_number), strval($page_number + 1), '...', strval($pages_count)];
-    }
-    if ($current_page_array_index === 4) {
-        $pages_arr = ['1', '...', strval($pages_count - 4), strval($pages_count - 3), '.' . strval($pages_count - 2), strval($pages_count - 1), strval($pages_count)];
-    }
-    if ($current_page_array_index === 5) {
-        $pages_arr = ['1', '2', '...', strval($pages_count - 3), strval($pages_count - 2), '.' . strval($pages_count - 1), strval($pages_count)];
-    }
-    if ($current_page_array_index === 6) {
-        $pages_arr = ['1', '2', '3', '...', strval($pages_count - 2), strval($pages_count - 1), '.' . strval($pages_count)];
-    }
-}
-@endphp
-
-
 <x-app-layout>
-    <div>
+    {{-- <div>
         <div class="container mx-auto px-4 sm:px-8 max-w-3xl">
             <div class="py-8">
                 <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
@@ -222,6 +180,5 @@ if ($pages_count <= 7) {
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> --}}
 </x-app-layout>

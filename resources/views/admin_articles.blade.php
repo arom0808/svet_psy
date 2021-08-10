@@ -14,7 +14,7 @@
     <form id="deleteModal" method="POST"
         class="invisible fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto">
         @csrf
-        <input type="hidden" name="callback" id="callback_input" value="/admin/articles" />
+        <input type="hidden" name="callback" id="callback_input" value="{{ route('admin_articles') }}" />
         <div class="w-full h-full text-center">
             <div class="flex h-full flex-col justify-between">
                 <div class="flex w-full justify-center">
@@ -37,7 +37,7 @@
                         Delete
                     </button>
                     <button type="button" onclick="closeDeleteModal()"
-                        class="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-indigo-500 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                        class="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-indigo-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         Cancel
                     </button>
                 </div>
@@ -89,7 +89,7 @@
                                     </th>
                                     <th scope="col"
                                         class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                                        Написал
+                                        Опубликовал
                                     </th>
                                     <th scope="col"
                                         class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">

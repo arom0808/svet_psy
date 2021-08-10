@@ -1,7 +1,7 @@
 <x-app-layout>
     <script src="https://cdn.tiny.cloud/1/qnxt4fjoc7e3sizw9clxdg99xfo7fbpz7pqgebcyh2g7zttr/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <section class="h-full bg-gray-100 bg-opacity-50">
+    <section class="min-h-screen h-full bg-gray-100 bg-opacity-50">
         <div class="container max-w-6xl mx-auto shadow-md md:w-3/4">
             <div class="space-y-6 bg-white">
                 <img src="{{ $article->previewPhotoPathURL() }}" />
@@ -18,7 +18,7 @@
                             plugins: 'code advlist autolink lists link image charmap print preview hr anchor pagebreak',
                             setup: function(editor) {
                                 editor.on('init', function(e) {
-                                    editor.setContent('{!! $html !!}', {
+                                    editor.setContent(`{!! $html !!}`, {
                                         format: 'html'
                                     });
                                 });
@@ -75,7 +75,7 @@
                     </div>
                     <div class="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
                         <h2 class="max-w-sm mx-auto md:w-1/3">
-                            Написал
+                            Опубликовал
                         </h2>
                         <div class="max-w-sm mx-auto space-y-5 md:w-2/3">
                             <div class=" relative ">

@@ -1,22 +1,22 @@
 <x-app-layout>
     <script src="https://cdn.tiny.cloud/1/qnxt4fjoc7e3sizw9clxdg99xfo7fbpz7pqgebcyh2g7zttr/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <form method="POST" action="{{ route('admin_new_article_post') }}" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="callback" value="{{ route('admin_articles') }}" />
-        <input type="hidden" name="publisher_id" value="{{ Auth::id() }}" />
-        <textarea name="html">
-                Hello world
-        </textarea>
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'code advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            });
-        </script>
-        <section class="h-screen bg-gray-100 bg-opacity-50">
-            <div class="container max-w-2xl mx-auto shadow-md md:w-3/4">
-                <div class="space-y-6 bg-white">
+    <section class="min-h-screen h-full bg-gray-100 bg-opacity-50">
+        <div class="container max-w-6xl mx-auto shadow-md md:w-3/4">
+            <div class="space-y-6 bg-white">
+                <form method="POST" action="{{ route('admin_new_article_post') }}" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="callback" value="{{ route('admin_articles') }}" />
+                    <input type="hidden" name="publisher_id" value="{{ Auth::id() }}" />
+                    <textarea name="html">
+                        Hello world
+                    </textarea>
+                    <script>
+                        tinymce.init({
+                            selector: 'textarea',
+                            plugins: 'code advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                        });
+                    </script>
                     <div class="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
                         <h2 class="max-w-sm mx-auto md:w-1/3">
                             Превью
@@ -84,8 +84,8 @@
                             Save
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
-        </section>
-    </form>
+        </div>
+    </section>
 </x-app-layout>

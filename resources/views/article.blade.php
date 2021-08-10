@@ -2,7 +2,7 @@
     <section class="min-h-screen h-full bg-gray-100 bg-opacity-50 pt-5">
         <div class="container max-w-6xl mx-auto shadow-md md:w-3/4">
             <div class="space-y-6 bg-white p-6">
-                <div class="w-full flex justify-center"><img src="{{ $article->previewPhotoPathURL() }}" /></div>
+                <div class="w-full flex justify-center"><img src="{{ $article->previewPhotoUrlAttribute() }}" /></div>
                 <div class="flex items-center">
                     <div class="block relative">
                         <img alt="profil" src="{{ $article->publisher->getProfilePhotoUrlAttribute() }}"

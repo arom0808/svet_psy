@@ -4,7 +4,7 @@
     <section class="min-h-screen h-full bg-gray-100 bg-opacity-50">
         <div class="container max-w-6xl mx-auto shadow-md md:w-3/4">
             <div class="space-y-6 bg-white">
-                <img src="{{ $article->previewPhotoPathURL() }}" />
+                <img src="{{ $article->previewPhotoUrlAttribute() }}" />
                 <form method="POST" action="{{ route('admin_article_post', $article->id) }}"
                     enctype="multipart/form-data">
                     @csrf

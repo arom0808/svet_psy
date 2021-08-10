@@ -2,7 +2,7 @@
     @foreach ($articles as $article)
         <div class="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer mx-auto my-6">
             <a href="{{ route('article', $article->id) }}" class="w-full block h-full">
-                <img alt="blog photo" src="{{ $article->previewPhotoPathURL() }}" class="max-h-40 w-full object-cover" />
+                <img alt="blog photo" src="{{ $article->previewPhotoUrlAttribute() }}" class="max-h-40 w-full object-cover" />
                 <div class="bg-white dark:bg-gray-800 w-full p-4">
                     <p class="text-indigo-500 text-md font-medium">{{ $article->category }}</p>
                     <p class="text-gray-800 dark:text-white text-xl font-medium mb-2">{{ $article->title }}</p>

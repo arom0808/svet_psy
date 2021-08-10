@@ -17,11 +17,11 @@ class Article extends Model
         return $this->belongsTo('App\Models\User', 'publisher_id', 'id');
     }
 
-    public function previewPhotoPathURL(){
-        return Storage::url($this->preview_photo_path);
+    public function previewPhotoUrlAttribute(){
+        return asset(Storage::url($this->preview_photo_path));
     }
 
-    public function htmlFilePathURL(){
-        return Storage::url($this->html_file_path);
+    public function htmlFileUrlAttribute(){
+        return asset(Storage::url($this->html_file_path));
     }
 }

@@ -18,10 +18,10 @@ class Article extends Model
     }
 
     public function previewPhotoUrlAttribute(){
-        return asset(Storage::url($this->preview_photo_path));
+        return Storage::url($this->preview_photo_path);
     }
 
     public function htmlFileUrlAttribute(){
-        return asset(Storage::url($this->html_file_path));
+        return Storage::url($this->html_file_path);
     }
 }
